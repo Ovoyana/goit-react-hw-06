@@ -1,8 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useId } from "react";
 import * as Yup from "yup";
-import { nanoid } from 'nanoid';
-import css from './ContactForm.module.css'
+import { useDispatch } from 'react-redux';
+import { initialValues } from '../../redux/availableContacts';
+import { addContact } from '../../redux/contactsSlice';
+import css from './ContactForm.module.css';
 
 const phoneRegExp = /^\d{3}-\d{2}-\d{2}$/;
 const FeedbackSchema = Yup.object().shape({
@@ -14,41 +16,35 @@ const FeedbackSchema = Yup.object().shape({
       .matches(phoneRegExp, "Invalid phone number")
       .required("Is required!!!"),
   });
-
-  const initialValues = {
-    id: "",
-    name: "",
-    number: "",
-  };
  
 
-  export default function ContactForm({onAdd}){
-    const nameContactId = useId();
-    const numberContactId = useId();
+  export default function ContactForm () {
+    const dispatch = useDispatch();
+    const nameId = useId();
+    const numberId = useId();
 
     const handleSubmit = (values, actions) => {
-        onAdd({ 
-            id: nanoid(), 
-            ...values });
-        actions.resetForm();
-      };
+      dispatch(addContact(values));
+      actions.resetForm();
+    };
+      
   
   return (
     <Formik
-      initialValues={initialValues}
+    initialValues={initialValues}
       validationSchema={FeedbackSchema}
       onSubmit={handleSubmit}
     >
       <Form  className={css.form}>
         <div className={css.field}>
-          <label className={css.text} htmlFor={nameContactId}>Name</label>
-          <Field className={css.input} type="text" name="name" id={nameContactId} />
+          <label className={css.text} htmlFor={nameId}>Name</label>
+          <Field className={css.input} type="text" name="name" id={nameId} />
           <ErrorMessage name="name" component="span" />
         </div>
 
         <div className={css.field}>
-          <label className={css.text} htmlFor={numberContactId}>Number</label>
-          <Field className={css.input} type="text" name="number" id={numberContactId} />
+          <label className={css.text} htmlFor={numberId}>Number</label>
+          <Field className={css.input} type="text" name="number" id={numberId} />
           <ErrorMessage name="number" component="span" />
         </div>
         <button className={css.btn} type="submit">Add contact</button>
