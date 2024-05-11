@@ -14,7 +14,7 @@ export default function ContactList() {
 
 
 
-  console.log(searchContact);
+  // console.log(searchContact);
  
 
   const filterContacts = contacts.filter(contact =>
