@@ -12,9 +12,9 @@ export default function ContactList() {
   console.log(contacts);
   console.log(searchContact);
 
-  const filterContacts = contacts.filter((contact) => {
-   return contact.name.toLowerCase().includes(searchContact.toLowerCase())
-});
+  const filterContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(searchContact.trim().toLowerCase())
+  );
 
 
     return (
