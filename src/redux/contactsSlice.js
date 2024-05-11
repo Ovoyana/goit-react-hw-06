@@ -9,12 +9,13 @@ const slice = createSlice({
     reducers: {
         addContact: {
             reducer(state, action) {
-                state.items.push(action.payload)
+                state.push(action.payload)
             },
-            prepare(values) {
+            prepare(data) {
                 return {
-                    payload: {
-                        ...values,
+                  payload: {
+                    name: data.name,
+                    number: data.number,
                         id: crypto.randomUUID(),
                     }
                 }
@@ -22,7 +23,7 @@ const slice = createSlice({
         },
         
         deleteContact: (state, action) => {
-            return state.items.filter(contact => contact.id === action.payload);
+            return state.filter(contact => contact.id !== action.payload);
         }
     }
     })
