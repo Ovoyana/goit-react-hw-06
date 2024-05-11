@@ -4,7 +4,7 @@ import { initialStateContacts } from "./availableContacts";
 
 const slice = createSlice({
     name: 'contacts',
-    initialState: { items: [initialStateContacts] },
+    initialState: { items: initialStateContacts },
  
     reducers: {
         addContact: {
