@@ -9,7 +9,7 @@ export default function ContactList() {
   const contacts = useSelector(selectContacts);
   const searchContact = useSelector(selectNameFilter);
 
-  console.log(contacts);
+
   console.log(searchContact);
 
   const filterContacts = contacts.filter(contact =>
