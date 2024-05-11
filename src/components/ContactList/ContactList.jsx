@@ -5,21 +5,27 @@ import { nanoid } from '@reduxjs/toolkit';
 import { selectNameFilter } from "../../redux/filtersSlice";
 import { selectContacts } from "../../redux/contactsSlice";
 
+
+const filterContacts = (contacts, searchContact) => {
+  return contacts.filter((contact) => contact.name.toLowerCase().includes(searchContact.toLowerCase()));
+}
 export default function ContactList() {
   const contacts = useSelector(selectContacts);
   const searchContact = useSelector(selectNameFilter);
+  const filteredContacts = filterContacts (contacts, searchContact);
 
 
   console.log(searchContact);
+ 
 
-  const filterContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(searchContact.trim().toLowerCase())
-  );
+  // const filterContacts = contacts.filter(contact =>
+  //   contact.name.toLowerCase().includes(searchContact.trim().toLowerCase())
+  // );
 
 
     return (
       <ul className={css.list}>
-        {filterContacts.map(contact => (
+        {filteredContacts.map(contact => (
           <li className={css.item} key={nanoid()}>
             <Contact data={contact} />
           </li>
