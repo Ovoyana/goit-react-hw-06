@@ -1,4 +1,4 @@
-export const initialStateContacts =
+export const initialStateContacts = 
     [
         {
             id: "id-1",
