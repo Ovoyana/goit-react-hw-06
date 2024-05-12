@@ -1,7 +1,7 @@
 import Contact from "../Contact/Contact";
 import css from './ContactList.module.css';
 import { useSelector } from "react-redux";
-import { nanoid } from '@reduxjs/toolkit';
+// import { nanoid } from '@reduxjs/toolkit';
 import { selectNameFilter } from "../../redux/filtersSlice";
 import { selectContacts } from "../../redux/contactsSlice";
 
@@ -14,7 +14,7 @@ export default function ContactList() {
 
 
 
-  // console.log(searchContact);
+  console.log(searchContact);
  
 
   const filterContacts = contacts.filter(contact => {
@@ -25,7 +25,7 @@ export default function ContactList() {
     return (
       <ul className={css.list}>
         {filterContacts.map(contact => (
-          <li className={css.item} key={nanoid()}>
+          <li className={css.item} key={contact.id}>
             <Contact data={contact} />
           </li>
         ))}
