@@ -3,7 +3,7 @@ import { initialStateContacts } from "./availableContacts";
 
 const initialState = {
     contacts: {
-      items: initialStateContacts,
+      items: {initialStateContacts},
     },
   };
 
@@ -16,11 +16,10 @@ const slice = createSlice({
             reducer(state, action) {
                 state.push(action.payload)
             },
-            prepare(data) {
+            prepare(values) {
                 return {
-                  payload: {
-                    name: data.name,
-                    number: data.number,
+                    payload: {
+                        ...values,
                         id: crypto.randomUUID(),
                     }
                 }
