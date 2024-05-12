@@ -5,7 +5,7 @@ import { initialStateContacts } from "./availableContacts";
 const slice = createSlice({
     name: 'contacts',
     initialState: { items: initialStateContacts },
- 
+  
     reducers: {
         addContact: {
             reducer(state, action) {
@@ -31,4 +31,5 @@ const slice = createSlice({
 
 export const { addContact, deleteContact } = slice.actions;
 export const contactsReducer = slice.reducer;
+
 export const selectContacts = (state) => state.items;
